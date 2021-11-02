@@ -18,7 +18,6 @@ public class AppS3Exercise {
 
 
     public static void main(String[] args) {
-        System.out.println("args length="+ args.length+" as string ->"+ Arrays.toString(args)+ " ");
         if (args.length != 1) {
             System.out.println("needed argument <bucket_name>");
             exit(0);
