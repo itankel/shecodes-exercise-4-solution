@@ -1,7 +1,7 @@
 package com.ifat.example.useawssdk.withdynamodb.shecodesexercise;
 
 
-//to create : mvn package
+//to create: mvn package
 // to be executed by
 //mvn exec:java -Dexec.mainClass="com.ifat.example.useawssdk.withdynamodb.shecodesexercise.AppWorkWithDynamoDB"
 public class AppWorkWithDynamoDB {
