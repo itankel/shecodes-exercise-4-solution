@@ -1,10 +1,5 @@
 package com.ifat.example.useawssdk.withec2.shecodesexerciese;
 
-
-
-//ami-0d9cca6f9ad40eb08
-//ami-09e67e426f25ce0d7  < --  ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20210430  still havent tried
-
 import lombok.SneakyThrows;
 
 import java.nio.charset.StandardCharsets;
@@ -33,6 +28,7 @@ public class AppWorkWithEc2 {
 
         sleep(3000);// to give time for the initiation
 
+        //check if the apache2 succeeded
         boolean validResponse = ValidateWebClient
                 .sendGetRequestWithRetry("http://" + instancePublicDnsName + "/index.html", 8);
         if (validResponse) {
@@ -49,17 +45,15 @@ public class AppWorkWithEc2 {
     }
 
     //ami-0c2b8ca1dad447f8a  --> I managed to create
-    //ami-0472eef47f816e45d -> creation worked
+    //ami-0472eef47f816e45d -> I managed to create too
     public static void main(String[] args) {
         String userData =
                 "#!/bin/bash\n" +
                         "sudo apt update -y\n" +
                         "sudo apt install -y apache2\n" +
                         "echo \"Hello world from $(hostname -f)\" >/var/www/html/index.html";
-        //"IyEvYmluL2Jhc2gNCnN1ZG8gYXB0IHVwZGF0ZSAteQ0Kc3VkbyBhcHQgaW5zdGFsbCAteSBhcGFjaGUyDQplY2hvICJIZWxsbyB3b3JsZCBmcm9tICQoaG9zdG5hbWUgLWYpIiA+L3Zhci93d3cvaHRtbC9pbmRleC5odG1s";
         AppWorkWithEc2 appWorkWithEc2 = new AppWorkWithEc2();
         appWorkWithEc2.mainFlow("ami-0472eef47f816e45d", userData);
-
     }
 
 }

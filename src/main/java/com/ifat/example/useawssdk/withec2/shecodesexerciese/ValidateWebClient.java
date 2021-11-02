@@ -26,7 +26,7 @@ public class ValidateWebClient {
                 .timeout(Duration.of(300, SECONDS))
                 .build();
 
-        HttpResponse<String> response = null;
+        HttpResponse<String> response;
         boolean returnVal = false;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -55,7 +55,7 @@ public class ValidateWebClient {
                 .GET()
                 .build();
 
-        CompletableFuture<HttpResponse<String>> resp = null;
+        CompletableFuture<HttpResponse<String>> resp;
         boolean returnVal = false;
         int numOfRetries = 0;
         do {
@@ -91,11 +91,5 @@ public class ValidateWebClient {
         return returnVal;
     }
 
-
-    public static void main(String[] args) {
-        System.out.println("start test");
-        System.out.println("request execute returned value ==>" + sendOneGetRequest("http://3.91.152.252/index.html"));
-        System.out.println("end test");
-    }
 }
 
