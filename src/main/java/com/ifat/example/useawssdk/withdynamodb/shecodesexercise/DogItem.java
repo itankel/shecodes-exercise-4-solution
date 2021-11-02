@@ -1,4 +1,4 @@
-package com.ifat.example.useawssdk.withdynamodb.shecodesexerciese;
+package com.ifat.example.useawssdk.withdynamodb.shecodesexercise;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

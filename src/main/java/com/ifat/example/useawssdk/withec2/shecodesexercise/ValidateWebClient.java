@@ -1,4 +1,4 @@
-package com.ifat.example.useawssdk.withec2.shecodesexerciese;
+package com.ifat.example.useawssdk.withec2.shecodesexercise;
 
 import java.io.IOException;
 import java.net.URI;

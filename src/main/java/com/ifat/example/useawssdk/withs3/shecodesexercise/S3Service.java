@@ -1,4 +1,4 @@
-package com.ifat.example.useawssdk.withs3.shecodesexerciese;
+package com.ifat.example.useawssdk.withs3.shecodesexercise;
 
 import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.regions.Region;

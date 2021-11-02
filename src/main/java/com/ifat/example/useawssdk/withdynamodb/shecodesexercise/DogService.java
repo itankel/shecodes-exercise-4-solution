@@ -1,4 +1,4 @@
-package com.ifat.example.useawssdk.withdynamodb.shecodesexerciese;
+package com.ifat.example.useawssdk.withdynamodb.shecodesexercise;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
@@ -13,50 +13,50 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class DogServiceUsingGenericService {
-    private DynamoDbServiceGenericItem dynamoDbServiceGenericItem;
-    private final String tableName="AnotherDogsBreeds";
+public class DogService {
+    private DynamoDbServiceForDogItem dynamoDbServiceForDogItem;
+    private final String tableName="DogsBreeds";
     private final String tableKey="breed";
     private final String searchAttrName="intelligence";
 
 
-    public DogServiceUsingGenericService() {
-        dynamoDbServiceGenericItem = new DynamoDbServiceGenericItem();
+    public DogService() {
+        dynamoDbServiceForDogItem = new DynamoDbServiceForDogItem();
     }
 
     public void createDogTable() {
-        dynamoDbServiceGenericItem.createTable(tableName, tableKey);
+        dynamoDbServiceForDogItem.createTable(tableName, tableKey);
     }
 
     public void loadDataFromJson(String inJsonFileName) {
-        dynamoDbServiceGenericItem.setTable(tableName,DogItem.class);
+        dynamoDbServiceForDogItem.setTable(tableName);
         loadRecords(inJsonFileName);
     }
-// this is not scan thus I must provide the key with search value
-    public void queryData(String breadName,int intelligence) {
-        dynamoDbServiceGenericItem.setTable(tableName,DogItem.class);
-        dynamoDbServiceGenericItem.queryData(breadName,searchAttrName, intelligence);
+
+    // this is not scan thus I must provide the key with search value
+    public void queryDataByBreedAndIntelligence(String breadVal, int intelligence) {
+        dynamoDbServiceForDogItem.setTable(tableName);
+        dynamoDbServiceForDogItem.queryData(breadVal, searchAttrName, intelligence);
     }
 
-    public void scanData(int intelligence) {
-        dynamoDbServiceGenericItem.setTable(tableName,DogItem.class);
-        dynamoDbServiceGenericItem.scanIndex(searchAttrName,intelligence);
+    public void scanDataByIntelligence(int intelligence) {
+        dynamoDbServiceForDogItem.setTable(tableName);
+        dynamoDbServiceForDogItem.scanIndex(searchAttrName, intelligence);
     }
 
 
     public void deleteDog(String keyVal) {
-        dynamoDbServiceGenericItem.setTable(tableName,DogItem.class);
-        dynamoDbServiceGenericItem.deleteItem(tableName,tableKey,keyVal);
+        dynamoDbServiceForDogItem.setTable(tableName);
+        dynamoDbServiceForDogItem.deleteItem(tableName, tableKey, keyVal);
     }
 
     public void deleteTable() {
-        dynamoDbServiceGenericItem.deleteDynamoDBTable(tableName);
+        dynamoDbServiceForDogItem.deleteDynamoDBTable(tableName);
     }
 
     public void close() {
-        dynamoDbServiceGenericItem.close();
+        dynamoDbServiceForDogItem.close();
     }
-
 
     private void loadRecords(String inputJsonFileName) {
         try {
@@ -70,12 +70,12 @@ public class DogServiceUsingGenericService {
             while (iter.hasNext()) {
                 currentNode = (ObjectNode) iter.next();
                 DogItem dogItem = jsonToObject(currentNode);
-                dynamoDbServiceGenericItem.putRecord(dogItem);
+                dynamoDbServiceForDogItem.putRecord(dogItem);
                 System.out.println("PutRecord succeeded: " + dogItem);
 
             }
             parser.close();
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("done");
@@ -110,8 +110,6 @@ public class DogServiceUsingGenericService {
         }
         return temperament;
     }
-
-
 
 
 }

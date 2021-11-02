@@ -1,19 +1,11 @@
-package com.ifat.example.useawssdk.withs3.shecodesexerciese;
-
-import software.amazon.awssdk.core.waiters.WaiterResponse;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.s3.model.*;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.waiters.S3Waiter;
-
-import java.util.Arrays;
+package com.ifat.example.useawssdk.withs3.shecodesexercise;
 
 import static java.lang.System.exit;
 
 //to create jar use
 // mvn package
 // to execute use
-// mvn exec:java -Dexec.mainClass="com.ifat.example.useawssdk.withs3.shecodesexerciese.AppS3Exercise" -Dexec.args="testfromcommandmvnline"
+// mvn exec:java -Dexec.mainClass="com.ifat.example.useawssdk.withs3.shecodesexercise.AppS3Exercise" -Dexec.args="testfromcommandmvnline"
 public class AppS3Exercise {
 
 

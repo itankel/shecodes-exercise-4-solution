@@ -1,4 +1,4 @@
-package com.ifat.example.useawssdk.withdynamodb.shecodesexerciese;
+package com.ifat.example.useawssdk.withdynamodb.shecodesexercise;
 
 import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.enhanced.dynamodb.*;
@@ -83,7 +83,6 @@ public class DynamoDbServiceForDogItem {
                     .iterator();
 
             while (results.hasNext()) {
-
                 DogItem rec = results.next();
                 System.out.println("The dog  record: " + rec.toString());
             }
@@ -141,8 +140,7 @@ public class DynamoDbServiceForDogItem {
 
     public void deleteItem(String tableName, String key, String keyVal) {
 
-        HashMap<String, AttributeValue> keyToGet =
-                new HashMap<String, AttributeValue>();
+        HashMap<String, AttributeValue> keyToGet = new HashMap<>();
 
         keyToGet.put(key, AttributeValue.builder()
                 .s(keyVal)
@@ -191,8 +189,8 @@ public class DynamoDbServiceForDogItem {
                         .keyType(KeyType.HASH)
                         .build())
                 .provisionedThroughput(ProvisionedThroughput.builder()
-                        .readCapacityUnits(new Long(10))
-                        .writeCapacityUnits(new Long(10))
+                        .readCapacityUnits(Long.valueOf(10))
+                        .writeCapacityUnits(Long.valueOf(10))
                         .build())
                 .tableName(tableName)
                 .build();

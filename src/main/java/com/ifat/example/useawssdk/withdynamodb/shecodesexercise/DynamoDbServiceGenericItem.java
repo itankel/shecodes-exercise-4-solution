@@ -1,4 +1,4 @@
-package com.ifat.example.useawssdk.withdynamodb.shecodesexerciese;
+package com.ifat.example.useawssdk.withdynamodb.shecodesexercise;
 
 import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.enhanced.dynamodb.*;
@@ -9,6 +9,7 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.*;
 import software.amazon.awssdk.services.dynamodb.waiters.DynamoDbWaiter;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class DynamoDbServiceGenericItem<T> {
 
         Region region = Region.US_EAST_1;
         dynamoDbClient = DynamoDbClient.builder()
-               // .endpointOverride(URI.create("http://localhost:8000"))// needed when using a local DB
+                .endpointOverride(URI.create("http://localhost:8000"))// needed when using a local DB
                 .region(region)
                 .build();
         enhancedClient = DynamoDbEnhancedClient.builder()
@@ -60,7 +61,7 @@ public class DynamoDbServiceGenericItem<T> {
             expressionValues.put(":value", att);
 
             Expression expression = Expression.builder()
-                    .expression(attName+" = :value")
+                    .expression(attName + " = :value")
                     .expressionValues(expressionValues)
                     .build();
 
@@ -91,7 +92,7 @@ public class DynamoDbServiceGenericItem<T> {
     }
 
     // scan with one attribute that has the value of attValue
-    public void scanIndex( String attributeName,int attValue) {
+    public void scanIndex(String attributeName, int attValue) {
         try {
 
             AttributeValue attVal = AttributeValue.builder()
@@ -136,8 +137,7 @@ public class DynamoDbServiceGenericItem<T> {
 
     public void deleteItem(String tableName, String key, String keyVal) {
 
-        HashMap<String, AttributeValue> keyToGet =
-                new HashMap<String, AttributeValue>();
+        HashMap<String, AttributeValue> keyToGet = new HashMap<>();
 
         keyToGet.put(key, AttributeValue.builder()
                 .s(keyVal)
@@ -186,8 +186,8 @@ public class DynamoDbServiceGenericItem<T> {
                         .keyType(KeyType.HASH)
                         .build())
                 .provisionedThroughput(ProvisionedThroughput.builder()
-                        .readCapacityUnits(new Long(10))
-                        .writeCapacityUnits(new Long(10))
+                        .readCapacityUnits(Long.valueOf(10))
+                        .writeCapacityUnits(Long.valueOf(10))
                         .build())
                 .tableName(tableName)
                 .build();

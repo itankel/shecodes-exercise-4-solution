@@ -1,4 +1,4 @@
-package com.ifat.example.useawssdk.withec2.shecodesexerciese;
+package com.ifat.example.useawssdk.withec2.shecodesexercise;
 
 import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.regions.Region;
@@ -55,7 +55,7 @@ public class Ec2Service {
 
     public String findRunningEC2InstancePublicDnsName(String instanceId) {
         System.out.println("------------------------end findRunningEC2InstancePublicDnsName");
-        findRunningEC2Instance(instanceId,(r)->extractPublicDnsName(r));
+        findRunningEC2Instance(instanceId, this::extractPublicDnsName);
         System.out.println("------------------------end findRunningEC2InstancePublicDnsName public DNS is " +
                 this.savedPublicDns);
         return this.savedPublicDns;
@@ -88,7 +88,7 @@ public class Ec2Service {
         WaiterResponse<DescribeInstancesResponse> waiterResponse =
                 ec2Waiter.waitUntilInstanceRunning(d -> d.filters(filter));
 
-        waiterResponse.matched().response().ifPresent(t->action.accept(t));
+        waiterResponse.matched().response().ifPresent(action::accept);
         System.out.println("------------------------end findRunningEC2Instance (action)");
     }
 
@@ -100,7 +100,7 @@ public class Ec2Service {
 
         TerminateInstancesResponse response = ec2.terminateInstances(terminateInstancesRequest);
         List<InstanceStateChange> terminatingInstances = response.terminatingInstances();
-        terminatingInstances.stream().forEach(System.out::println);
+        terminatingInstances.forEach(System.out::println);
         System.out.println("------------------------end terminateInstance");
 
     }
