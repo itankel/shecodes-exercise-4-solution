@@ -17,7 +17,7 @@ public class AppWorkWithDynamoDB {
         DogService dogService = new DogService();
         dogService.createDogTable();
         dogService.loadDataFromJson("data/DogData.txt");
-        dogService.queryDataByBreedAndIntelligence("Poodle", 2);  // this is not what was requested
+        dogService.queryDataByBreedAndIntelligence("Poodle", 2);
         dogService.scanDataByIntelligence(9);
         dogService.deleteDog("German Shepard");
         dogService.deleteTable();
